@@ -1,9 +1,14 @@
+# main.py
+
 from fastapi import FastAPI
-from app.routers import control,sensors
+from app.routers import control, sensors, map
 
-app = FastAPI()
+app = FastAPI(
+    title="Rover API",
+    description="API backend pour le rover détecteur de mines",
+    version="1.0.0"
+)
 
-# On ajoute le router de pilotage du rover
 app.include_router(control.router, prefix="/control", tags=["Control"])
-# On ajoute le router de données capteurs
 app.include_router(sensors.router, prefix="/sensors", tags=["Sensors"])
+app.include_router(map.router, prefix="/map", tags=["Map"])
