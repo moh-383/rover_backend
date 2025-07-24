@@ -1,14 +1,14 @@
 from fastapi import APIRouter
-import serial
+from models.schemas import GPSData
+from state import rover_state
 
 router = APIRouter()
-ser = serial.Serial('/dev/ttyUSB1', 9600)  # GPS séparé du pilotage
+
+@router.post("/")
+def update_gps(data: GPSData):
+    rover_state["gps"] = data
+    return {"message": "Coordonnées GPS mises à jour"}
 
 @router.get("/")
 def get_gps():
-    line = ser.readline().decode().strip()
-    try:
-        lat, lon, angle = map(float, line.split(","))
-        return {"lat": lat, "lon": lon, "angle": angle}
-    except:
-        return {"error": "Invalid GPS data"}
+    return rover_state.get("gps")

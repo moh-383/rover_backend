@@ -1,17 +1,14 @@
 from fastapi import APIRouter
-import serial
+from models.schemas import MoveCommand
+from state import rover_state
 
 router = APIRouter()
-ser = serial.Serial('/dev/ttyUSB0', 9600)  # Adapter le port
 
-@router.get("/move")
-def move_robot(direction: str):
-    cmd = {
-        "forward": "F",
-        "backward": "B",
-        "left": "L",
-        "right": "R",
-        "stop": "S"
-    }.get(direction.lower(), "S")
-    ser.write(cmd.encode())
-    return {"status": "ok", "command": cmd}
+@router.post("/")
+def control_rover(cmd: MoveCommand):
+    rover_state["movement"] = cmd
+    return {"message": f"Mouvement: {cmd.direction}"}
+
+@router.get("/")
+def get_last_command():
+    return rover_state.get("movement")
