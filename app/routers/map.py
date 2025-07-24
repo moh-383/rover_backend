@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.schemas import GPSData
+from app.models.schemas import GPSData
 from state import rover_state
 
 router = APIRouter()

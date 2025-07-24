@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.schemas import MoveCommand
+from app.models.schemas import MoveCommand
 from state import rover_state
 
 router = APIRouter()

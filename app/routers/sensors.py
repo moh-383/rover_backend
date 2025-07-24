@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.schemas import SensorData
+from app.models.schemas import SensorData
 from services.detection import detect_mine
 from state import rover_state
 
