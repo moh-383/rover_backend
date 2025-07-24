@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import sensors, map, control
+from app.routers import sensors, map, control, arm
 
 app = FastAPI()
 
@@ -15,6 +15,7 @@ app.add_middleware(
 app.include_router(sensors.router, prefix="/sensors")
 app.include_router(map.router, prefix="/map")
 app.include_router(control.router, prefix="/control")
+app.include_router(arm.router,prefix="/control")
 
 @app.get("/")
 def read_root():
