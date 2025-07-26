@@ -6,7 +6,7 @@ import requests
 router = APIRouter()
 
 # Remplace par l'IP réelle de l'ESP32-CAM
-ESP32_IP = "http://192.168.4.1"  # à modifier quand tu connais l'IP
+ESP32_IP = "http://172.19.218.206"  # à modifier quand tu connais l'IP
 
 @router.post("/start_servo")
 async def start_servo():

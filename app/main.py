@@ -15,7 +15,7 @@ app.add_middleware(
 app.include_router(sensors.router, prefix="/sensors")
 app.include_router(map.router, prefix="/map")
 app.include_router(control.router, prefix="/control")
-app.include_router(arm.router,prefix="/control")
+app.include_router(arm.router,prefix="/arm")
 
 @app.get("/")
 def read_root():
